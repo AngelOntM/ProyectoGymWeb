@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Website</title>
-</head>
-<body>
   <div class="container">
     <nav class="navbar">
       <div class="left-nav">
@@ -17,8 +9,19 @@
           <li><a href="#">Membresías</a></li>
         </ul>
       </div>
-      <button class="login-btn">Iniciar sesión</button>
+      <div class="right-nav">
+        <div *ngIf="loged">
+          <ul class="nav-links">
+            <li><a href="">{{ currentUser.name }}</a></li>
+            <li><button (click)="logOut()" class="login-btn"><mat-icon>exit_to_app</mat-icon></button></li>
+          </ul>
+        </div>
+        <div *ngIf="!loged">
+          <button class="login-btn">Iniciar sesión</button>
+        </div>
+      </div>
     </nav>
+    
 
     <div class="inicio-card">
         <div class="inicio-content">
@@ -138,11 +141,5 @@
           <p>© 2024 Gymbros. Todos los derechos reservados</p>
         </div>
       </footer>
-
-      
-      
-
   </div>
-</body>
-</html>
 

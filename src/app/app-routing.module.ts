@@ -5,8 +5,8 @@ import { EntrenadoresComponent } from './entrenadores/entrenadores.component';
 import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
-  { path: 'home', component: InicioComponent},
+  { path: 'log', component: LoginComponent},
+  { path: '', component: InicioComponent},
   { path: 'entr', component: EntrenadoresComponent}
   
 
