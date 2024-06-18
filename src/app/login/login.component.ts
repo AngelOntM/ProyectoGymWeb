@@ -68,7 +68,7 @@ export class LoginComponent {
           timer: 2500,
           showConfirmButton: false
         }).then(() => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('Home/home');
         });
       },
       error: (err) => {

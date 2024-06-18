@@ -3,8 +3,8 @@
     <div class="left-nav">
       <img src="../../assets/img/logo.jpg" alt="Logo" class="logo">
       <ul class="nav-links">
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Entrenadores</a></li>
+        <li><a routerLink="home">Inicio</a></li>
+        <li><a routerLink="entre">Entrenadores</a></li>
         <li><a href="#">Productos</a></li>
         <li><a href="#">Membresías</a></li>
       </ul>
@@ -12,13 +12,16 @@
     <div class="right-nav">
       <div *ngIf="loged">
         <ul class="nav-links">
-          <li><a href="">{{ currentUser.name }}</a></li>
-          <li><button mat-icon-button (click)="logOut()" class="login-btn"><mat-icon>exit_to_app</mat-icon></button></li>
+          <li><a routerLink="perfil">{{ currentUser.name }}</a></li>
+          <li><button mat-icon-button (click)="logOut()" class="login-btn" ><mat-icon>exit_to_app</mat-icon></button></li>
         </ul>
       </div>
       <div *ngIf="!loged">
-        <button class="login-btn">Iniciar sesión</button>
+        <a routerLink=""><button class="login-btn">Iniciar sesión</button></a>
       </div>
     </div>
   </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
