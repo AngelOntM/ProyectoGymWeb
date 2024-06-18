@@ -11,6 +11,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     EntrenadoresComponent,
     InicioComponent,
-    NavbarComponent
+    NavbarComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

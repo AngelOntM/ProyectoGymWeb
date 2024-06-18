@@ -56,6 +56,8 @@ export class LoginComponent {
           rol: response.user.rol.rol_name,
           name: response.user.name,
           token: response.token,
+          telefono: response.user.phone_number,
+          email: response.user.email
         };
         this.session.setLoggedInUser(user);
 
@@ -66,7 +68,7 @@ export class LoginComponent {
           timer: 2500,
           showConfirmButton: false
         }).then(() => {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('');
         });
       },
       error: (err) => {

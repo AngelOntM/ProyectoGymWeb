@@ -1,0 +1,35 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <h2>Información de Perfil</h2>
+    <div class="profile-info-card">
+      <div class="profile-info-left">
+        <label for="name">Nombre:</label>
+        <input id="name" type="text" value="{{ currentUser.name}}" readonly>
+        
+        <label for="phone">Teléfono:</label>
+        <input id="phone" type="text" value="{{ currentUser.telefono}}" readonly>
+        
+        <label for="email">Correo:</label>
+        <input id="email" type="email" value="{{ currentUser.email}}" readonly>
+      </div>
+      
+      <div class="profile-info-right">
+        <label for="subscribed-since">Suscrito desde:</label>
+        <input id="subscribed-since" type="text" value="00/00/0000" readonly>
+        
+        <label for="membership-type">Tipo de Membresía:</label>
+        <input id="membership-type" type="text" value="Individual" readonly>
+        
+        <label for="membership-status">Estado de membresía:</label>
+        <input id="membership-status" type="text" value="Por expirar" readonly>
+        
+        <label for="days-remaining">Días restantes:</label>
+        <input id="days-remaining" type="text" value="6" readonly>
+
+        <button class="renew-button">Renovar Suscripción</button>
+        
+      </div>
+    </div>
+    
+  </div>
+  
