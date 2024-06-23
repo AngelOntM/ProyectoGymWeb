@@ -1,0 +1,46 @@
+<mat-sidenav-container class="sidenav-container" [class.mat-drawer-opened]="!isScreenSmall && sidenav.opened" [class.mat-drawer-over]="isScreenSmall">
+    <mat-sidenav #sidenav mode="side" [mode]="isScreenSmall ? 'over' : 'side'" [opened]="!isScreenSmall" class="color">
+      <mat-nav-list>
+        <h1 mat-list-item class="text">
+          <span>{{ currentUser.rol }}</span>
+        </h1>
+        <a mat-list-item routerLink="perfil">
+          <span class="entry colorText">
+            <mat-icon>group</mat-icon>
+            <span>Clientes</span>
+          </span>
+        </a>
+        <a *ngIf="currentUser.rol === 'Admin'" mat-list-item routerLink="home">
+          <span class="entry colorText">
+            <mat-icon>work</mat-icon>
+            <span>Empleados</span>
+          </span>
+        </a>
+        <a *ngIf="currentUser.rol === 'Admin'" mat-list-item routerLink="entre">
+          <span class="entry colorText">
+            <mat-icon>assignment_ind</mat-icon>
+            <span>Membresías</span>
+          </span>
+        </a>
+        <!-- Agrega más enlaces de navegación según sea necesario -->
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar class="navbar color">
+        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="truncated">Bienvenido, {{ currentUser.name }}</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button aria-label="Logout" (click)="logOut()">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </mat-toolbar>
+      <div class="main-content">
+        <br>
+        <router-outlet></router-outlet>
+        <!-- Contenido dinámico de tu aplicación -->
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

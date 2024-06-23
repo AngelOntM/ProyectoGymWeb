@@ -12,6 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { LayoutComponent } from './layout/layout.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,14 +28,20 @@ import { PerfilComponent } from './perfil/perfil.component';
     EntrenadoresComponent,
     InicioComponent,
     NavbarComponent,
-    PerfilComponent
+    PerfilComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    BrowserAnimationsModule
   ],
   providers: [
     provideClientHydration(),
