@@ -4,7 +4,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { EntrenadoresComponent } from './entrenadores/entrenadores.component';
-import { FormsModule } from '@angular/forms';
 import { InicioComponent } from './inicio/inicio.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -19,7 +18,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RegisterFormModule } from './load';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,19 +29,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     InicioComponent,
     NavbarComponent,
     PerfilComponent,
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
     MatListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RegisterFormModule
   ],
   providers: [
     provideClientHydration(),
