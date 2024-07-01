@@ -9,9 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MembresiaRegisterFormComponent } from './components/membresias-module/register-form/register-form.component';
 import { MembresiaUpdateFormComponent } from './components/membresias-module/update-form/update-form.component';
+import { ProductsRegisterFormComponent } from './components/productos-module/register-form/register-form.component';
+import { ProductsUpdateFormComponent } from './components/productos-module/update-form/update-form.component';
 
 @NgModule({
-  declarations: [MembresiaRegisterFormComponent, MembresiaUpdateFormComponent],
+  declarations: [
+    MembresiaRegisterFormComponent,
+    MembresiaUpdateFormComponent, 
+    ProductsRegisterFormComponent, 
+    ProductsUpdateFormComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,7 +31,9 @@ import { MembresiaUpdateFormComponent } from './components/membresias-module/upd
   exports: [
     //FORMS DE MEMBRESIAS
     MembresiaRegisterFormComponent,
-    MembresiaUpdateFormComponent
+    MembresiaUpdateFormComponent,
+    ProductsRegisterFormComponent,
+    ProductsUpdateFormComponent
 
     //OTROS FORMS
   ],

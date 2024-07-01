@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     PerfilComponent,
     LayoutComponent,
+
   ],
   imports: [
     FormsModule,

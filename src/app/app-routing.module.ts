@@ -7,11 +7,13 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
 import { MembresiasModuleComponent } from './components/membresias-module/membresias-module.component';
+import { ProductosModuleComponent } from './components/productos-module/productos-module.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'Admin', component: LayoutComponent, children: [
     { path: 'membresias', component: MembresiasModuleComponent },
+    { path: 'productos', component: ProductosModuleComponent }
   ]  },
   { path: 'Home', component: NavbarComponent,children: [
     { path: 'home', component: InicioComponent },
