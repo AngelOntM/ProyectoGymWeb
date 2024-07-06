@@ -59,7 +59,7 @@ export class NavbarComponent {
               timer: 1500 // Tiempo en milisegundos (1.5 segundos)
             }).then(() => {
               this.userService.logout();
-              this.router.navigateByUrl('login');
+              this.router.navigateByUrl('');
             });
           },
           error: (err) => {
@@ -75,6 +75,15 @@ export class NavbarComponent {
         });
       }
     });
+  }
+
+  navegacion(){
+    if (this.currentUser.rol === "Admin"){
+      this.router.navigate(['Admin']);
+    }
+    else{
+      this.router.navigate(['Home/perfil']);
+    }
   }
 
 }

@@ -78,3 +78,7 @@ body, html {
   .right-nav {
     justify-content: flex-end; /* Mantiene los elementos de la derecha alineados a la derecha */
   }
+
+  .pointer{
+    cursor: pointer;
+  }

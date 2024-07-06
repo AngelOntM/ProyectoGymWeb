@@ -88,4 +88,11 @@ export class LayoutComponent implements OnInit, AfterViewInit  {
       }
     });
   }
+
+  navegacion(){
+    if (this.currentUser.rol === "Admin"){
+      this.router.navigate(['Home/home']);
+    }
+  }
+
 }

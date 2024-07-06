@@ -5,14 +5,15 @@
       <ul class="nav-links">
         <li><a routerLink="home">Inicio</a></li>
         <li><a routerLink="entre">Entrenadores</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Membresías</a></li>
+        <li><a routerLink="productos">Productos</a></li>
+        <li><a routerLink="membresias">Membresías</a></li>
       </ul>
     </div>
     <div class="right-nav">
       <div *ngIf="loged">
         <ul class="nav-links">
-          <li><a routerLink="perfil">{{ currentUser.name }}</a></li>
+          <li *ngIf="currentUser.rol === 'Admin'"><a class="pointer" (click)="navegacion()">{{ currentUser.name }}</a></li>
+          <li *ngIf="currentUser.rol !== 'Admin'"><a routerLink="perfil">{{ currentUser.name }}</a></li>
           <li><button mat-icon-button (click)="logOut()" class="login-btn" ><mat-icon>exit_to_app</mat-icon></button></li>
         </ul>
       </div>

@@ -97,7 +97,7 @@ export class LoginComponent {
                   timer: 2500,
                   showConfirmButton: false
                 }).then(() => {
-                  this.router.navigateByUrl('/Admin');
+                  this.router.navigateByUrl('/Home/home');
                 });
               },
               error: (err) => {

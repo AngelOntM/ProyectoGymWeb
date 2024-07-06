@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ProductosComponent } from './productos/productos.component';
+import { MembresiasComponent } from './membresias/membresias.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -20,6 +22,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterFormModule } from './load';
 import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     PerfilComponent,
     LayoutComponent,
+    ProductosComponent,
+    MembresiasComponent
 
   ],
   imports: [

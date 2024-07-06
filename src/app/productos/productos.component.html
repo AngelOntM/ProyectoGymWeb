@@ -1,0 +1,20 @@
+<div class="container">
+<div class="content">
+    <div class="search-container">
+      <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="searchTerm" (input)="search()">
+        <button *ngIf="searchTerm.length === 0" class="search-button"><mat-icon>search</mat-icon></button>
+        <button (click)="borrar()" *ngIf="searchTerm.length !== 0" class="search-button" ><mat-icon>cancel</mat-icon></button>
+      </div>
+    <div class="productos">
+      <div *ngFor="let producto of productos" class="producto-card">
+        <div class="producto-image">
+          <img src="{{ producto.product_image_path }}" alt="Proteina Whey">
+        </div>
+        <div class="producto-info">
+          <h3>{{ producto.product_name }}</h3>
+          <p class="precio">${{ producto.price }} MXN</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,18 +6,33 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableFilterModule } from 'ng-mat-table-filter';
 
 import { MembresiaRegisterFormComponent } from './components/membresias-module/register-form/register-form.component';
 import { MembresiaUpdateFormComponent } from './components/membresias-module/update-form/update-form.component';
 import { ProductsRegisterFormComponent } from './components/productos-module/register-form/register-form.component';
 import { ProductsUpdateFormComponent } from './components/productos-module/update-form/update-form.component';
+import { OrdenModuleComponent } from './components/orden-module/orden-module.component';
+import { AddOrdenComponent } from './components/orden-module/add-orden/add-orden.component';
+import { DetalleComponent } from './components/orden-module/detalle/detalle.component';
+import { PaymentFormComponent } from './components/orden-module/payment-form/payment-form.component';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @NgModule({
   declarations: [
     MembresiaRegisterFormComponent,
     MembresiaUpdateFormComponent, 
     ProductsRegisterFormComponent, 
-    ProductsUpdateFormComponent
+    ProductsUpdateFormComponent,
+    AddOrdenComponent,
+    PaymentFormComponent,
+    DetalleComponent,
+    OrdenModuleComponent
   ],
   imports: [
     CommonModule,
@@ -26,14 +41,21 @@ import { ProductsUpdateFormComponent } from './components/productos-module/updat
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTableFilterModule
   ],
   exports: [
     //FORMS DE MEMBRESIAS
     MembresiaRegisterFormComponent,
     MembresiaUpdateFormComponent,
     ProductsRegisterFormComponent,
-    ProductsUpdateFormComponent
+    ProductsUpdateFormComponent,
+    PaymentFormComponent
+    
 
     //OTROS FORMS
   ],
