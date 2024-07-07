@@ -22,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterFormModule } from './load';
 import { FormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -49,7 +50,8 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatListModule,
     BrowserAnimationsModule,
-    RegisterFormModule
+    RegisterFormModule,
+    MatNativeDateModule
   ],
   providers: [
     provideClientHydration(),

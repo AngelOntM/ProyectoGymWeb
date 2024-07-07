@@ -21,6 +21,11 @@ import { DetalleComponent } from './components/orden-module/detalle/detalle.comp
 import { PaymentFormComponent } from './components/orden-module/payment-form/payment-form.component';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { RegisterFormComponent } from './components/clientes-module/register-form/register-form.component';
+import { UpdateFormComponent } from './components/clientes-module/update-form/update-form.component';
+import { EmployeeRegisterFormComponent } from './components/empleados-module/register-form/register-form.component';
+import { EmployeeUpdateFormComponent } from './components/empleados-module/update-form/update-form.component';
 
 
 @NgModule({
@@ -32,7 +37,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     AddOrdenComponent,
     PaymentFormComponent,
     DetalleComponent,
-    OrdenModuleComponent
+    OrdenModuleComponent,
+    RegisterFormComponent,
+    UpdateFormComponent,
+    EmployeeRegisterFormComponent,
+    EmployeeUpdateFormComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +55,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatTableFilterModule
+    MatTableFilterModule,
+    MatDatepickerModule
   ],
   exports: [
     //FORMS DE MEMBRESIAS
@@ -54,7 +64,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MembresiaUpdateFormComponent,
     ProductsRegisterFormComponent,
     ProductsUpdateFormComponent,
-    PaymentFormComponent
+    PaymentFormComponent,
+    RegisterFormComponent,
+    UpdateFormComponent,
+    EmployeeRegisterFormComponent,
+    EmployeeUpdateFormComponent
     
 
     //OTROS FORMS
