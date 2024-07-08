@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-register-form',
+  selector: 'app-employee-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })

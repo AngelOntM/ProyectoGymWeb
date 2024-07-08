@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-update-form',
+  selector: 'app-employee-update-form',
   templateUrl: './update-form.component.html',
   styleUrls: ['./update-form.component.css']
 })

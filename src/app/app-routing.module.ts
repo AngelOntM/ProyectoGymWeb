@@ -15,18 +15,20 @@ import { DetalleComponent } from './components/orden-module/detalle/detalle.comp
 import { ClientesModuleComponent } from './components/clientes-module/clientes-module.component';
 import { EmpleadosModuleComponent } from './components/empleados-module/empleados-module.component';
 import { VisitasModuleComponent } from './components/visitas-module/visitas-module.component';
+import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', component: NavbarComponent,children: [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: InicioComponent },
-    { path: 'perfil', component: PerfilComponent },
+    { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Cliente'] } },
     { path: 'entre', component: EntrenadoresComponent },
     { path: 'productos', component: ProductosComponent },
     { path: 'membresias', component: MembresiasComponent },
   ]},
-  { path: 'Admin', component: LayoutComponent, children: [
+  { path: 'Admin', component: LayoutComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Admin'] }, children: [
     { path: 'ordenesDetalle', redirectTo: 'ordenes', pathMatch: 'full' },
     { path: 'clientes', component: ClientesModuleComponent },
     { path: 'empleados', component: EmpleadosModuleComponent },

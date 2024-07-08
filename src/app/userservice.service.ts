@@ -1,4 +1,3 @@
-// user.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,13 +10,15 @@ export class UserService {
 
   setLoggedInUser(user: any): void {
     this.loggedInUser = user;
-    sessionStorage.setItem('currentUser', JSON.stringify(user));
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+    }
   }
 
   getLoggedInUser(): any {
     if (this.loggedInUser) {
       return this.loggedInUser;
-    } else {
+    } else if (typeof window !== 'undefined' && window.sessionStorage) {
       const storedUser = sessionStorage.getItem('currentUser');
       if (storedUser) {
         this.loggedInUser = JSON.parse(storedUser);
@@ -29,6 +30,8 @@ export class UserService {
 
   logout(): void {
     this.loggedInUser = null;
-    sessionStorage.removeItem('currentUser');
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      sessionStorage.removeItem('currentUser');
+    }
   }
 }
