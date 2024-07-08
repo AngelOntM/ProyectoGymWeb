@@ -59,7 +59,7 @@ export class NavbarComponent {
               timer: 1500 // Tiempo en milisegundos (1.5 segundos)
             }).then(() => {
               this.userService.logout();
-              this.router.navigateByUrl('');
+              this.router.navigateByUrl('login');
             });
           },
           error: (err) => {

@@ -97,7 +97,7 @@ export class LoginComponent {
                   timer: 2500,
                   showConfirmButton: false
                 }).then(() => {
-                  this.router.navigateByUrl('/Home/home');
+                  this.router.navigateByUrl('/home');
                 });
               },
               error: (err) => {
@@ -111,22 +111,11 @@ export class LoginComponent {
             });
           }
         } else {
-          const user = {
-            rol: response.user.rol.rol_name,
-            name: response.user.name,
-            token: response.token,
-          };
-          this.session.setLoggedInUser(user);
-
           Swal.fire({
-            icon: 'success',
-            title: '¡Inicio de sesión exitoso!',
-            text: `Bienvenido ${response.user.name}`,
-            timer: 2500,
-            showConfirmButton: false
-          }).then(() => {
-            this.router.navigateByUrl('/Home/home');
-          });
+            icon: 'error',
+            title: 'No puedes hacer eso',
+            text: 'No tienes acceso aqui!!',
+          })
         }
       },
       error: (err) => {
@@ -148,7 +137,7 @@ export class LoginComponent {
               timer: 2500,
               showConfirmButton: false
             }).then(() => {
-              this.router.navigateByUrl('/Home/home');
+              this.router.navigateByUrl('/home');
             });
           },
           error: (err) => {

@@ -38,13 +38,20 @@ h1 {
   overflow: hidden; /* Oculta cualquier contenido que sobresalga */
   text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto se corta */
 }
-  
 
-.form-field {
-    width: 45%;
-  }
+button {
+    background-color: transparent;
+    border-color: transparent;
+}
 
-  .form-container {
-    display: flex;
-    gap: 16px; /* Ajusta el espacio entre los selects según sea necesario */
-  }
+button :hover{
+    cursor: pointer;
+}
+
+.primary {
+    color: blue;
+}
+
+.warn {
+    color: red;
+}

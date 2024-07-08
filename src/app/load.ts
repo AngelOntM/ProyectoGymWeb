@@ -16,9 +16,7 @@ import { MembresiaUpdateFormComponent } from './components/membresias-module/upd
 import { ProductsRegisterFormComponent } from './components/productos-module/register-form/register-form.component';
 import { ProductsUpdateFormComponent } from './components/productos-module/update-form/update-form.component';
 import { OrdenModuleComponent } from './components/orden-module/orden-module.component';
-import { AddOrdenComponent } from './components/orden-module/add-orden/add-orden.component';
 import { DetalleComponent } from './components/orden-module/detalle/detalle.component';
-import { PaymentFormComponent } from './components/orden-module/payment-form/payment-form.component';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -34,14 +32,12 @@ import { EmployeeUpdateFormComponent } from './components/empleados-module/updat
     MembresiaUpdateFormComponent, 
     ProductsRegisterFormComponent, 
     ProductsUpdateFormComponent,
-    AddOrdenComponent,
-    PaymentFormComponent,
     DetalleComponent,
     OrdenModuleComponent,
     RegisterFormComponent,
     UpdateFormComponent,
     EmployeeRegisterFormComponent,
-    EmployeeUpdateFormComponent
+    EmployeeUpdateFormComponent,
   ],
   imports: [
     CommonModule,
@@ -64,7 +60,6 @@ import { EmployeeUpdateFormComponent } from './components/empleados-module/updat
     MembresiaUpdateFormComponent,
     ProductsRegisterFormComponent,
     ProductsUpdateFormComponent,
-    PaymentFormComponent,
     RegisterFormComponent,
     UpdateFormComponent,
     EmployeeRegisterFormComponent,

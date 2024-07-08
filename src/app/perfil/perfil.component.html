@@ -13,19 +13,14 @@
       </div>
       
       <div class="profile-info-right">
-        <label for="subscribed-since">Suscrito desde:</label>
-        <input id="subscribed-since" type="text" value="00/00/0000" readonly>
         
         <label for="membership-type">Tipo de Membresía:</label>
-        <input id="membership-type" type="text" value="Individual" readonly>
-        
-        <label for="membership-status">Estado de membresía:</label>
-        <input id="membership-status" type="text" value="Por expirar" readonly>
+        <input id="membership-type" type="text" value="" readonly>
         
         <label for="days-remaining">Días restantes:</label>
-        <input id="days-remaining" type="text" value="6" readonly>
+        <input id="days-remaining" type="text" value="" readonly>
 
-        <button class="renew-button">Renovar Suscripción</button>
+        <button class="renew-button"(click)="canjear()">Canjear codigo</button>
         
       </div>
     </div>

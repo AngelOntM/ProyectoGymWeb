@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { UserService } from '../../userservice.service';
 import { environment } from '../../../enviroment/enviroment';
 import Swal from 'sweetalert2';
-import { PaymentFormComponent } from './payment-form/payment-form.component';
 
 interface Orden {
   id: number;
@@ -117,24 +116,5 @@ export class OrdenModuleComponent implements OnInit, AfterViewInit {
     });
   }
 
-  payOrder(ord: any) {
-    const dialogRef = this.dialog.open(PaymentFormComponent, {
-      width: '800px',
-      data: ord,
-      disableClose: true
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.getOrd()
-      } else {
-        Swal.fire({
-          title: 'Pago cancelado',
-          text: '¡Recuerda pagar tu orden!.',
-          icon: 'warning',
-        });
-      }
-    });
-  }
 
 }

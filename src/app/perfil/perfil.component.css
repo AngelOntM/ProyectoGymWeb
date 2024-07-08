@@ -61,6 +61,7 @@ body, html {
     border-radius: 8px;
     cursor: pointer;
     width: 94%;
+    margin-top: 23px;
   }
   
   .renew-button:hover {
