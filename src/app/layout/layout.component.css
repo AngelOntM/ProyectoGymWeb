@@ -73,3 +73,11 @@
     overflow: hidden; /* Oculta cualquier contenido que sobresalga */
     text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto se corta */
   }
+
+  .perfilClick {
+    background-color: transparent;
+    color:white;
+    border-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+  }

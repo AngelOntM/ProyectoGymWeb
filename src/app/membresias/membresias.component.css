@@ -63,6 +63,7 @@ body, html{
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .membresia-image img {
@@ -88,4 +89,35 @@ body, html{
   font-size: 1.5em;
   color: #e67e22;
   font-weight: bold;
+}
+
+.swal-title-class {
+  font-size: 24px;
+}
+
+.swal-html-class {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal-html-class img {
+  width: 150px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.swal-html-class div {
+  text-align: left;
+}
+
+.swal-html-class p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.swal-html-class .price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e74c3c;
 }

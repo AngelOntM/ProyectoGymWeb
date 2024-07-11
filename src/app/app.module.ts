@@ -36,7 +36,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     PerfilComponent,
     LayoutComponent,
     ProductosComponent,
-    MembresiasComponent
+    MembresiasComponent,
 
   ],
   imports: [

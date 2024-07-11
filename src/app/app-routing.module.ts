@@ -17,6 +17,7 @@ import { EmpleadosModuleComponent } from './components/empleados-module/empleado
 import { VisitasModuleComponent } from './components/visitas-module/visitas-module.component';
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
+import { PerfilModuleComponent } from './components/perfile-module/perfile-module.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
     { path: 'ordenes', component: OrdenModuleComponent },
     { path: 'ordenesDetalle/:id', component: DetalleComponent },
     { path: 'visitas', component: VisitasModuleComponent },
+    { path: 'perfil', component: PerfilModuleComponent },
     { path: '**', redirectTo: 'clientes' }
   ]  },
   // { path: 'Home', component: NavbarComponent,children: [

@@ -19,6 +19,7 @@ import { OrdenModuleComponent } from './components/orden-module/orden-module.com
 import { DetalleComponent } from './components/orden-module/detalle/detalle.component';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RegisterFormComponent } from './components/clientes-module/register-form/register-form.component';
 import { UpdateFormComponent } from './components/clientes-module/update-form/update-form.component';
@@ -52,7 +53,8 @@ import { EmployeeUpdateFormComponent } from './components/empleados-module/updat
     MatTableModule,
     MatPaginatorModule,
     MatTableFilterModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatCardModule,
   ],
   exports: [
     //FORMS DE MEMBRESIAS
