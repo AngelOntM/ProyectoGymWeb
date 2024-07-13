@@ -36,6 +36,12 @@
         </mat-select>
       </mat-form-field>
     </div>
+
+    <mat-form-field class="form-field">
+      <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">Seleccionar Archivo</button>
+      <input type="file" #fileInput (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png" formControlName="product_image_path" style="display: none;">
+      <input matInput [value]="imageFile ? imageFile.name : ''" placeholder="No file selected" readonly>
+    </mat-form-field>
     
   </form>
 </div>

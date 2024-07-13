@@ -8,7 +8,7 @@
     <div class="productos">
       <div *ngFor="let producto of productos" class="producto-card" (click)="showProductDetails(producto)">
         <div class="producto-image">
-          <img src="{{ producto.product_image_path }}" alt="Proteina Whey">
+          <img src="{{ imgurl + producto.product_image_path }}" alt="Proteina Whey">
         </div>
         <div class="producto-info">
           <h3>{{ producto.product_name }}</h3>

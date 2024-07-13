@@ -85,12 +85,12 @@ export class MembresiasModuleComponent implements OnInit, AfterViewInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.addUser(result);
+        this.addMbm(result);
       }
     });
   }
   
-  addUser(membresia: Membership) {
+  addMbm(membresia: any) {
     Swal.fire({
       title: 'Registrando membresía...',
       text: 'Por favor espera',
@@ -128,7 +128,7 @@ export class MembresiasModuleComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateMbm(mbm: Membership, id: any) {
+  updateMbm(mbm: any, id: any) {
     Swal.fire({
       title: 'Actualizando membresía...',
       text: 'Por favor espera',

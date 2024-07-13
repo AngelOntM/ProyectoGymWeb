@@ -93,7 +93,7 @@ export class ProductosModuleComponent implements OnInit, AfterViewInit{
     });
   }
 
-  addPdct(producto: Product) {
+  addPdct(producto: any) {
     Swal.fire({
       title: 'Registrando producto...',
       text: 'Por favor espera',
@@ -131,7 +131,7 @@ export class ProductosModuleComponent implements OnInit, AfterViewInit{
     });
   }
 
-  updatePdct(pdct: Product, id: any) {
+  updatePdct(pdct: any, id: any) {
     Swal.fire({
       title: 'Actualizando producto...',
       text: 'Por favor espera',
@@ -140,7 +140,7 @@ export class ProductosModuleComponent implements OnInit, AfterViewInit{
         Swal.showLoading();
       }
     });
-    this.http.put<any>(`${this.apiURL}/productos/`+ id, pdct,{
+    this.http.post<any>(`${this.apiURL}/productos/`+ id, pdct,{
       headers: {
         Authorization: `Bearer ${this.currentUser.token}`
       }

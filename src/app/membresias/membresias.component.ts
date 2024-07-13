@@ -14,6 +14,7 @@ interface Membership {
   active: boolean;
   discount: number;
   description:string;
+  product_image_path: string;
   created_at: string;
   updated_at: string;
 }
@@ -27,6 +28,7 @@ export class MembresiasComponent implements OnInit {
 
   currentUser: any;
   private apiURL = environment.apiURL;
+  imgurl = environment.imgURL
 
   membership: Membership[] = [];
   membershipB: Membership[] = [];
@@ -90,7 +92,7 @@ export class MembresiasComponent implements OnInit {
       title: `<h2 style="font-size: 24px; ">${member.product_name}</h2>`,
       html: `
         <div style="display: flex; align-items: center;">
-          <img src="../../assets/img/proteina.jpg" alt="${member.product_name}" style="width: 150px; height: auto; margin-right: 20px;">
+          <img src="${this.imgurl + member.product_image_path}" alt="${member.product_name}" style="width: 150px; height: auto; margin-right: 20px;">
           <div style="text-align: left;">
             <p style="font-size: 16px; margin-bottom: 10px;">${member.description}</p>
             <p style="font-size: 20px; font-weight: bold; color: #e74c3c;">$${member.price} MXN</p>
