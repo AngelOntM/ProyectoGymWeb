@@ -19,10 +19,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterFormModule } from './load';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 
 
@@ -37,6 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     LayoutComponent,
     ProductosComponent,
     MembresiasComponent,
+    PaymentSuccessComponent,
 
   ],
   imports: [
@@ -51,7 +54,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     BrowserAnimationsModule,
     RegisterFormModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule
   ],
   providers: [
     provideClientHydration(),

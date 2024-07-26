@@ -18,9 +18,11 @@ import { VisitasModuleComponent } from './components/visitas-module/visitas-modu
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
 import { PerfilModuleComponent } from './components/perfile-module/perfile-module.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
+  { path: 'success', component: PaymentSuccessComponent, canActivate: [AuthGuard, RoleGuard], data: { roles: ['Cliente'] } },
   { path: '', component: NavbarComponent,children: [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: InicioComponent },

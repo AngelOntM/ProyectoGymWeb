@@ -62,7 +62,7 @@ export class PerfilModuleComponent implements OnInit {
       }
     }).subscribe({
       next: (response) => {
-        this.user = response;
+        this.user = response.user;
         Swal.close()
       },
       error: (err) => {
@@ -110,7 +110,8 @@ export class PerfilModuleComponent implements OnInit {
   updateInfo(user: any) {
     const dialogRef = this.dialog.open(EmployeeUpdateFormComponent, {
       width: '800px',
-      data: user
+      data: user,
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -154,15 +155,16 @@ export class PerfilModuleComponent implements OnInit {
         Swal.showLoading();
       }
     });
-    this.http.put<any>(`${this.apiURL}/users/admin/`+ id, user,{
+    this.http.post<any>(`${this.apiURL}/users/admin/`+ id, user,{
       headers: {
         Authorization: `Bearer ${this.currentUser.token}`
       }
     }).subscribe({
       next: (response) => {
         this.currentUser.name = response.user.name;
-        Swal.fire('Empleado actualizado', 'El empleado ha sido actualizado con éxito', 'success');
-        this.getUser();
+        Swal.fire('Info actualizada', 'La informacion ha sido actualizada con éxito', 'success').then(()=>{
+          this.getUser();
+        });
       },
       error: (err) => {
         Swal.fire('Error', 'No se pudo actualizar el empleado', 'error');

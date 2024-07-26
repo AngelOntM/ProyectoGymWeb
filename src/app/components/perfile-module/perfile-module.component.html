@@ -16,7 +16,6 @@
       <p><strong>Teléfono:</strong> {{ user.phone_number }}</p>
       <p><strong>Dirección:</strong> {{ user.address }}</p>
       <p><strong>Fecha de Nacimiento:</strong> {{ user.date_of_birth | date }}</p>
-      <p><strong>Rol ID:</strong> {{ user.rol_id }}</p>
       <p>
         <strong>Última Actualización:</strong>
         <span *ngIf="user.updated_at; else noUpdate">{{ user.updated_at | date:'short' }}</span>

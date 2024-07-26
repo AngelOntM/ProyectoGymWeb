@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EmpleadosModuleComponent } from '../empleados-module.component';
 
 @Component({
   selector: 'app-employee-update-form',

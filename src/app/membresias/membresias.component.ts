@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../enviroment/enviroment';
 import { UserService } from '../userservice.service';
 import Swal from 'sweetalert2';
-
+import { loadStripe } from '@stripe/stripe-js';
 
 interface Membership {
   id: number;
@@ -13,7 +13,7 @@ interface Membership {
   size: number;
   active: boolean;
   discount: number;
-  description:string;
+  description: string;
   product_image_path: string;
   created_at: string;
   updated_at: string;
@@ -22,13 +22,15 @@ interface Membership {
 @Component({
   selector: 'app-membresias',
   templateUrl: './membresias.component.html',
-  styleUrl: './membresias.component.css'
+  styleUrls: ['./membresias.component.css']
 })
 export class MembresiasComponent implements OnInit {
 
   currentUser: any;
   private apiURL = environment.apiURL;
-  imgurl = environment.imgURL
+  imgurl = environment.imgURL;
+
+  private stripe: any;
 
   membership: Membership[] = [];
   membershipB: Membership[] = [];
@@ -36,33 +38,30 @@ export class MembresiasComponent implements OnInit {
   searched: boolean = false;
   errorShown: boolean = false;
 
-  constructor(private http: HttpClient, private userService: UserService) {
-  }
+  constructor(private http: HttpClient, private userService: UserService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
+    this.stripe = await loadStripe('pk_test_51Pc08PLTqA9tmmllvh1GBkYunBiAFmNi8AF0bmEyKAAyhcKBrv1YJFpNfOAX7Tr6Ky0VqODPDlVsoaemqIOMRrrn00xMiBhNCh');
     this.getMbm();
   }
 
   getMbm() {
-    this.http.get<any>(`${this.apiURL}/membresias`, {
-      headers: {
-      }
-    }).subscribe({
+    this.http.get<any>(`${this.apiURL}/membresias`).subscribe({
       next: (response) => {
         this.membership = response;
         this.membershipB = response;
       },
       error: (err) => {
-        Swal.fire('Error', 'No se pudo cargar la lista de membresias', 'error');
+        Swal.fire('Error', 'No se pudo cargar la lista de membresías', 'error');
       }
     });
   }
 
   search() {
     this.searched = false;
-    this.errorShown = false; // Añadir una variable para rastrear si el error ya se mostró
-  
+    this.errorShown = false;
+
     if (this.searchTerm.trim() === '') {
       this.membership = this.membershipB;
     } else {
@@ -70,47 +69,124 @@ export class MembresiasComponent implements OnInit {
       this.membership = this.membershipB.filter(member =>
         member.product_name.toLowerCase().includes(lowerSearchTerm)
       );
-  
+
       if (this.membership.length === 0 && !this.errorShown) {
         this.searched = true;
-        this.errorShown = true; // Marcar que el error se ha mostrado
+        this.errorShown = true;
       }
-  
+
       if (this.searched) {
         Swal.fire('Error', 'No se encontraron resultados', 'error');
       }
     }
   }
-  
-  borrar(){
+
+  borrar() {
     this.searchTerm = '';
     this.membership = this.membershipB;
   }
 
   showMemberDetails(member: Membership) {
     Swal.fire({
-      title: `<h2 style="font-size: 24px; ">${member.product_name}</h2>`,
+      title: member.product_name,
       html: `
-        <div style="display: flex; align-items: center;">
-          <img src="${this.imgurl + member.product_image_path}" alt="${member.product_name}" style="width: 150px; height: auto; margin-right: 20px;">
-          <div style="text-align: left;">
-            <p style="font-size: 16px; margin-bottom: 10px;">${member.description}</p>
-            <p style="font-size: 20px; font-weight: bold; color: #e74c3c;">$${member.price} MXN</p>
-          </div>
-        </div>
+        <img src="${this.imgurl + member.product_image_path}" alt="${member.product_name}" style="width: 100px; height: 100px; margin-bottom: 10px;">
+        <p>${member.description}</p>
+        <p><strong>Precio:</strong> $${member.price} MXN</p>
       `,
-      showConfirmButton: false,
-      width: '600px',
-      padding: '20px',
-      background: '#fff',
-      backdrop: `rgba(0, 0, 0, 0.4)`,
-      customClass: {
-        title: 'swal-title-class',
-        htmlContainer: 'swal-html-class'
+      confirmButtonText: 'Cerrar',
+      showCancelButton: true,
+      cancelButtonText: 'Pagar con Stripe',
+      cancelButtonColor: '#3085d6',
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        // Lógica para cerrar el modal
+      },
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.cancel) {
+        // Llamar a tu función de pago de Stripe aquí
+        Swal.fire({
+          title: 'Cargando...',
+          text: 'Por favor espere',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          }
+        });
+        this.initiatePayment(member.id);
       }
     });
   }
 
+  async initiatePayment(productId: number) {
+    if (this.currentUser.rol === 'Cliente') {
+      this.current(productId);
+    } else {
+      Swal.fire('Error', 'No puedes comprar aquí', 'error');
+    }
+  }
 
+  current(data: number) {
+    this.http.get<any>(`${this.apiURL}/user`, {
+      headers: {
+        'Authorization': `Bearer ${this.currentUser.token}`
+      }
+    }).subscribe({
+      next: (response) => {
+        this.haciendoCompra(response, data);
+      },
+      error: (err) => {
+        Swal.fire('Error', 'No se pudo realizar la compra', 'error');
+      }
+    });
+  }
 
-}
+  haciendoCompra(client: any, data: number) {
+    if (client.active_membership !== null) {
+      Swal.fire('Error', 'Ya tienes una membresía activa', 'error');
+    } else {
+      this.creandoOrden(client, data);
+    }
+  }
+
+  creandoOrden(client: any, data: number) {
+    const payload = { user_id: client.user.id, product_id: data };
+    this.http.post<any>(`${this.apiURL}/orders/memberships`, payload, {
+      headers: {
+        'Authorization': `Bearer ${this.currentUser.token}`
+      }
+    }).subscribe({
+      next: (response) => {
+        this.pagandoStripe(response.id);
+      },
+      error: (err) => {
+        Swal.fire('Error', 'No se pudo realizar la compra', 'error');
+      }
+    });
+  }
+
+  async pagandoStripe(orderId: number) {
+    this.http.post<any>(`${this.apiURL}/orders/${orderId}/create-checkout`, {}, {
+      headers: {
+        'Authorization': `Bearer ${this.currentUser.token}`
+      }
+    }).subscribe({
+      next: async (response) => {
+        Swal.close();
+        const { id: sessionId } = response;
+  
+        // Redirigir al usuario al checkout de Stripe
+        const { error } = await this.stripe.redirectToCheckout({
+          sessionId: sessionId, // Usar sessionId aquí
+        });
+  
+        if (error) {
+          Swal.fire('Error', error.message, 'error');
+        }
+      },
+      error: (err) => {
+        Swal.fire('Error', 'No se pudo realizar la compra', 'error');
+      }
+    });
+  }
+}///Congre we
