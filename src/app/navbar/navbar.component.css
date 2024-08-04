@@ -49,7 +49,7 @@ body, html {
     height: 40px; /* Asegura que todos los elementos tengan la misma altura */
     color: #fff;
     text-decoration: none;
-    padding: 10px 15px; /* Asegura que los elementos tengan un padding consistente */
+    padding: 10px 10px; /* Asegura que los elementos tengan un padding consistente */
   }
   
   .navbar .login-btn {

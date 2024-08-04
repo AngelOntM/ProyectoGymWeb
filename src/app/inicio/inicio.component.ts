@@ -16,9 +16,9 @@ export class InicioComponent {
   // apiURL = environment.apiURL
   // currentUser : any
 
-  // constructor(private userService:UserService, private http:HttpClient, private router:Router){
+  constructor(private userService:UserService, private http:HttpClient, private router:Router){
 
-  // }
+  }
 
   // ngOnInit(){
   //   if(this.userService.getLoggedInUser() != null)
@@ -76,5 +76,10 @@ export class InicioComponent {
   //     }
   //   });
   // }
-
+  navegacion(){
+      this.router.navigateByUrl('espacios');
+  }
+  goHome(): void {
+    this.router.navigate(['/espacios']);
+  }
 }

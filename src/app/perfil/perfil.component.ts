@@ -6,6 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { strict } from 'node:assert';
 
+interface User {
+  end_date:string
+  }
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -15,14 +19,46 @@ export class PerfilComponent {
 
   currentUser : any
   apiURL = environment.apiURL
+  userMember!: User;
+  fecha: Date;
+  diasRestante: any;
 
 
   constructor(private userService:UserService, private http:HttpClient, private router:Router)
   {
+    this.fecha = new Date();
   }
 
   ngOnInit(){
     this.currentUser = this.userService.getLoggedInUser()
+    this.getUserMember()
+  }
+
+  getUserMember() {
+    this.http.get<any>(`${this.apiURL}/user`, {
+      headers: {
+        Authorization: `Bearer ${this.currentUser.token}`
+      }
+    }).subscribe({
+      next: (response) => {
+        this.userMember = response.active_membership;
+        this.calcularDiferenciaDias()
+      },
+      error: (err) => {
+        Swal.fire('Error', 'No se pudo cargar el perfil', 'error');
+      }
+    });
+  }
+
+  
+
+  // Método para calcular la diferencia en días
+  calcularDiferenciaDias() {
+    const endDateString = this.userMember.end_date;
+    const endDate = new Date(endDateString);
+    const unDia = 24 * 60 * 60 * 1000; // Milisegundos en un día
+    const diferencia = Math.abs(endDate.getTime() - this.fecha.getTime());
+    this.diasRestante = Math.round(diferencia / unDia);
   }
 
   canjear() {

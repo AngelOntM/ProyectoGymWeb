@@ -1,17 +1,9 @@
-<div class="payment-success-container" fxLayout="column" fxLayoutAlign="center center">
-    <mat-card class="payment-success-card">
-      <mat-card-header>
-        <mat-card-title>
-          <mat-icon color="primary" class="success-icon">check_circle</mat-icon>
-          <span>¡Pago Exitoso!</span>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Tu pago ha sido procesado correctamente.</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="goHome()">Volver al Inicio</button>
-      </mat-card-actions>
-    </mat-card>
+<div class="confirmation-container">
+  <div class="confirmation-card">
+      <img src="../../assets/img/check.png" alt="Icono de Confirmación" class="confirmation-icon">
+      <h1>Tu compra se ha realizado correctamente</h1>
+      <p>Se te a enviado a tu correo electronico lo necesario para la activacion de tu membresia.</p>
+      <p>¡Que lo disfrutes!</p>
+      <button class="confirmation-button" (click)="goHome()">Entendido</button>
   </div>
-  
+</div>

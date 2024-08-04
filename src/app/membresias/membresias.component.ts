@@ -119,10 +119,25 @@ export class MembresiasComponent implements OnInit {
   }
 
   async initiatePayment(productId: number) {
-    if (this.currentUser.rol === 'Cliente') {
-      this.current(productId);
-    } else {
-      Swal.fire('Error', 'No puedes comprar aquí', 'error');
+    try{
+      if (this.currentUser.rol === 'Cliente') {
+        this.current(productId);
+      } else {
+        Swal.fire('Error', 'No puedes comprar aquí', 'error');
+      }
+    }
+    catch{
+      Swal.close();
+      Swal.fire({
+        title: 'Error',
+        text: 'Necesitas iniciar sesion si quires comprar aqui',
+        icon: 'error', // Puedes usar 'success', 'error', 'warning', 'info', 'question'
+        showConfirmButton: true, // Muestra el botón de confirmación
+        confirmButtonText: 'Aceptar', // Texto del botón de confirmación
+        didOpen: () => {
+          Swal.hideLoading(); // Explicitamente esconder cualquier loading
+        }
+      });
     }
   }
 
@@ -144,6 +159,7 @@ export class MembresiasComponent implements OnInit {
   haciendoCompra(client: any, data: number) {
     if (client.active_membership !== null) {
       Swal.fire('Error', 'Ya tienes una membresía activa', 'error');
+      console.log(client.active_membership.membership_detail)
     } else {
       this.creandoOrden(client, data);
     }

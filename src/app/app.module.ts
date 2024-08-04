@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { EntrenadoresComponent } from './entrenadores/entrenadores.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -25,6 +24,8 @@ import { RegisterFormModule } from './load';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
+import { EspaciosComponent } from './espacios/espacios.component';
 
 
 
@@ -32,7 +33,6 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
   declarations: [
     AppComponent,
     LoginComponent,
-    EntrenadoresComponent,
     InicioComponent,
     NavbarComponent,
     PerfilComponent,
@@ -40,6 +40,8 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
     ProductosComponent,
     MembresiasComponent,
     PaymentSuccessComponent,
+    NosotrosComponent,
+    EspaciosComponent,
 
   ],
   imports: [
