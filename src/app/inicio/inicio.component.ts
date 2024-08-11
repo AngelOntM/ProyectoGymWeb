@@ -76,10 +76,16 @@ export class InicioComponent {
   //     }
   //   });
   // }
-  navegacion(){
-      this.router.navigateByUrl('espacios');
-  }
-  goHome(): void {
+  goEspacios(): void {
     this.router.navigate(['/espacios']);
+  }
+  goNosotros(): void {
+    this.router.navigate(['/nosotros']);
+  }
+  goProducts(): void {
+    this.router.navigate(['/productos']);
+  }
+  goMembres(): void {
+    this.router.navigate(['/membresias']);
   }
 }

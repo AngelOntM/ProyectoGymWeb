@@ -108,6 +108,7 @@ export class PerfilComponent {
     }).subscribe({
       next: (response) => {
         Swal.fire('Éxito', 'El código ha sido canjeado correctamente.', 'success');
+        window.location.reload();
       },
       error: (err) => {
         Swal.fire('Error', 'El código es incorrecto, ya fue usado o el usuario ya cuenta con membresía.', 'error');

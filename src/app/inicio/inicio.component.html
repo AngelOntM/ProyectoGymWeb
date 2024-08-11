@@ -5,7 +5,7 @@
           <h1>Bienvenidos a <br>Gymbros</h1>
           <p>Experimente las mejores instalaciones de fitness y la orientación experta para alcanzar sus objetivos de fitness.</p>
           <div class="inicio-buttons">
-              <button (click)="goHome()" class="inicio-buttons btn btn-secondary">Leer más</button>
+              <button (click)="goEspacios()" class="inicio-buttons btn btn-secondary">Leer más</button>
           </div>
         </div>
         <div class="inicio-image">
@@ -25,7 +25,7 @@
                     personalizada de nuestros entrenadores experimentados para alcanzar sus objetivos de acondicionamiento físico.</p>
             </div>
             <div class="service-btn">
-                <button class="btn btn-primary">Saber mas</button>
+                <button (click)="goNosotros()" class="btn btn-primary">Ir a</button>
             </div>
             </div>
             <div class="service-card">
@@ -35,7 +35,7 @@
                 <p>Contamos con un sistema de membresias de varias categorias para nuestros clientes mas fieles.</p>
                 </div>
                 <div class="service-btn">
-                <button class="btn btn-primary">Saber mas</button>
+                <button (click)="goMembres()" class="btn btn-primary">Ir a</button>
                 </div>
             </div>
             <div class="service-card">
@@ -45,7 +45,7 @@
                 <p>En nuestras instalaciones contamos con un sistema de venta de productos para que pueda complementar sus entrenamientos.</p>
                 </div>
                 <div class="service-btn">
-                <button class="btn btn-primary">Saber mas</button>
+                <button (click)="goProducts()" class="btn btn-primary">Ir a</button>
                 </div>
             </div>
     
@@ -111,14 +111,13 @@
           </div>
         </div>
       </div>
-    
-      <footer class="footer">
-        <div class="footer-bottom">
-          <div class="footer-logo">
-            <img src="../../assets/img/logo.jpg" alt="Logo">
-          </div>
-          <p>© 2024 Gymbros. Todos los derechos reservados</p>
-        </div>
-      </footer>
   </div>
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-logo">
+        <img src="../../assets/img/logo.jpg" alt="Logo">
+      </div>
+      <p>© 2024 Gymbros. Todos los derechos reservados</p>
+    </div>
+  </footer>
 

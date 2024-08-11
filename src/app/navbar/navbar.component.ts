@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { UserService } from '../userservice.service';
 import { Router } from '@angular/router';
 import { environment } from '../../enviroment/enviroment';
@@ -8,28 +8,49 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
 
-  loged : boolean = false
-  apiURL = environment.apiURL
-  currentUser : any
+  loged: boolean = false;
+  apiURL = environment.apiURL;
+  currentUser: any;
+  menuActive: boolean = false; // Estado del menú
 
-  constructor(private userService:UserService, private http:HttpClient, private router:Router){
+  constructor(private userService: UserService, private http: HttpClient, private router: Router) {}
 
+  ngOnInit() {
+    if (this.userService.getLoggedInUser() != null) {
+      this.currentUser = this.userService.getLoggedInUser();
+      this.loged = true;
+    } else {
+      this.loged = false;
+    }
   }
 
-  ngOnInit(){
-    if(this.userService.getLoggedInUser() != null)
-      {
-        this.currentUser = this.userService.getLoggedInUser()
-        this.loged = true
+  toggleMenu() {
+    this.menuActive = !this.menuActive;
+    const navbar = document.querySelector('.navbar');
+    if (this.menuActive) {
+      navbar?.classList.add('active');
+    } else {
+      navbar?.classList.remove('active');
+    }
+  }
+
+  closeMenu() {
+    this.menuActive = false;
+    const navbar = document.querySelector('.navbar');
+    navbar?.classList.remove('active');
+  }
+
+  ngAfterViewInit() {
+    window.addEventListener('click', (event) => {
+      const navbar = document.querySelector('.navbar');
+      if (this.menuActive && !navbar?.contains(event.target as Node)) {
+        this.closeMenu();
       }
-      else
-      {
-        this.loged = false
-      }
+    });
   }
 
   logOut(): void {
@@ -44,7 +65,6 @@ export class NavbarComponent {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Hacer la solicitud para cerrar sesión usando el token
         this.http.post<any>(`${this.apiURL}/logout`, null, {
           headers: {
             Authorization: `Bearer ${this.currentUser.token}`
@@ -56,7 +76,7 @@ export class NavbarComponent {
               text: 'Tu sesión ha sido cerrada correctamente.',
               icon: 'success',
               showConfirmButton: false,
-              timer: 1500 // Tiempo en milisegundos (1.5 segundos)
+              timer: 1500
             }).then(() => {
               this.userService.logout();
               this.router.navigateByUrl('login');
@@ -77,13 +97,11 @@ export class NavbarComponent {
     });
   }
 
-  navegacion(){
-    if (this.currentUser.rol === "Admin"){
+  navegacion() {
+    if (this.currentUser.rol === "Admin") {
       this.router.navigate(['Admin']);
-    }
-    else{
+    } else {
       this.router.navigate(['Home/perfil']);
     }
   }
-
 }

@@ -82,3 +82,61 @@ body, html {
   .pointer{
     cursor: pointer;
   }
+
+ /* Estilos generales (ya incluidos) */
+
+.hamburger-menu {
+  display: none;
+  font-size: 30px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px; /* Espacio entre el botón de menú y el logo */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px; /* Ajustar el padding para que los elementos se alineen mejor */
+  }
+
+  .left-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .left-nav .nav-links {
+    display: none; /* Oculta los enlaces del lado izquierdo inicialmente */
+  }
+
+  .hamburger-menu {
+    display: block; /* Muestra el menú hamburguesa */
+  }
+
+  .navbar.active .left-nav .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Asegúrate de que el menú se despliegue debajo del navbar */
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Asegura que el fondo sea consistente */
+    z-index: 1;
+  }
+
+  .navbar.active .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .right-nav {
+    display: flex;
+    align-items: center;
+  }
+}
+

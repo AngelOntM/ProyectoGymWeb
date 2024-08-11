@@ -1,20 +1,21 @@
 <div class="container">
-<nav class="navbar">
+  <nav class="navbar">
     <div class="left-nav">
+      <button class="hamburger-menu" (click)="toggleMenu()">&#9776;</button>
       <img src="../../assets/img/logo.jpg" alt="Logo" class="logo">
       <ul class="nav-links">
-        <li><a routerLink="home">Inicio</a></li>
-        <li><a routerLink="nosotros">Nosotros</a></li>
-        <li><a routerLink="productos">Productos</a></li>
-        <li><a routerLink="membresias">Membresías</a></li>
+        <li><a routerLink="home" (click)="closeMenu()">Inicio</a></li>
+        <li><a routerLink="nosotros" (click)="closeMenu()">Nosotros</a></li>
+        <li><a routerLink="productos" (click)="closeMenu()">Productos</a></li>
+        <li><a routerLink="membresias" (click)="closeMenu()">Membresías</a></li>
       </ul>
     </div>
     <div class="right-nav">
       <div *ngIf="loged">
         <ul class="nav-links">
-          <li *ngIf="currentUser.rol === 'Admin'"><a class="pointer" (click)="navegacion()">{{ currentUser.name }}</a></li>
-          <li *ngIf="currentUser.rol !== 'Admin'"><a routerLink="perfil">{{ currentUser.name }}</a></li>
-          <li><button mat-icon-button (click)="logOut()" class="login-btn" ><mat-icon>exit_to_app</mat-icon></button></li>
+          <li *ngIf="currentUser.rol === 'Admin'"><a class="pointer" (click)="navegacion(); closeMenu()">{{ currentUser.name }}</a></li>
+          <li *ngIf="currentUser.rol !== 'Admin'"><a routerLink="perfil" (click)="closeMenu()">{{ currentUser.name }}</a></li>
+          <li><button mat-icon-button (click)="logOut()" class="login-btn"><mat-icon>exit_to_app</mat-icon></button></li>
         </ul>
       </div>
       <div *ngIf="!loged">

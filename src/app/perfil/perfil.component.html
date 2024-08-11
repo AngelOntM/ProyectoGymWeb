@@ -20,11 +20,21 @@
         <label for="days-remaining">Días restantes:</label>
         <input id="days-remaining" type="text" value="{{diasRestante}}" readonly>
 
-        <button class="renew-button"(click)="canjear()">Canjear codigo</button>
-        <button class="renew-button"(click)="changePassword()">Cambiar contraseña</button>
-        
       </div>
+    </div>
+    <h2>Opciones:</h2>
+    <div class="profile-info-card">
+      <button class="renew-button"(click)="changePassword()">Cambiar contraseña</button>
+      <button class="renew-button"(click)="canjear()">Canjear codigo</button>
     </div>
     
   </div>
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-logo">
+        <img src="../../assets/img/logo.jpg" alt="Logo">
+      </div>
+      <p>© 2024 Gymbros. Todos los derechos reservados</p>
+    </div>
+  </footer>
   
