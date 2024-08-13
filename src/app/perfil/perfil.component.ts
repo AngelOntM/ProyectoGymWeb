@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { strict } from 'node:assert';
 
 interface User {
+  membership_name:string,
   end_date:string
   }
 
