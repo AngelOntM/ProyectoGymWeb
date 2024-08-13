@@ -41,7 +41,7 @@ import { EspaciosComponent } from './espacios/espacios.component';
     MembresiasComponent,
     PaymentSuccessComponent,
     NosotrosComponent,
-    EspaciosComponent,
+    EspaciosComponent
 
   ],
   imports: [

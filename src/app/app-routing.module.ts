@@ -20,6 +20,8 @@ import { PerfilModuleComponent } from './components/perfile-module/perfile-modul
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { EspaciosComponent } from './espacios/espacios.component';
+import { VisitChartModuleComponent } from './components/visit-chart-module/visit-chart-module.component';
+import { OrdenChartModuleComponent } from './components/orden-chart-module/orden-chart-module.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -43,6 +45,8 @@ const routes: Routes = [
     { path: 'ordenesDetalle/:id', component: DetalleComponent },
     { path: 'visitas', component: VisitasModuleComponent },
     { path: 'perfil', component: PerfilModuleComponent },
+    { path: 'vapi', component: VisitChartModuleComponent },
+    { path: 'vapo', component: OrdenChartModuleComponent },
     { path: '**', redirectTo: 'clientes' }
   ]  },
   // { path: 'Home', component: NavbarComponent,children: [

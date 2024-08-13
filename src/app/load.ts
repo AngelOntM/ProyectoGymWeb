@@ -24,6 +24,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { UpdateFormComponent } from './components/clientes-module/update-form/update-form.component';
 import { EmployeeUpdateFormComponent } from './components/empleados-module/update-form/update-form.component';
 import { VisitasModuleComponent } from './components/visitas-module/visitas-module.component';
+import { VisitChartModuleComponent } from './components/visit-chart-module/visit-chart-module.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { OrdenChartModuleComponent } from './components/orden-chart-module/orden-chart-module.component';
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { VisitasModuleComponent } from './components/visitas-module/visitas-modu
     OrdenModuleComponent,
     UpdateFormComponent,
     EmployeeUpdateFormComponent,
-    VisitasModuleComponent
+    VisitasModuleComponent,
+    VisitChartModuleComponent,
+    OrdenChartModuleComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +58,7 @@ import { VisitasModuleComponent } from './components/visitas-module/visitas-modu
     MatTableFilterModule,
     MatDatepickerModule,
     MatCardModule,
+    NgxEchartsModule.forRoot({echarts:()=>import('echarts')})
   ],
   exports: [
     //FORMS DE MEMBRESIAS
