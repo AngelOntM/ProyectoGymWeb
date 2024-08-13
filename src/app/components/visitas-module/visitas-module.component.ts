@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { environment } from '../../../enviroment/enviroment';
 import { UserService } from '../../userservice.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableFilterModule } from 'ng-mat-table-filter';
 
 
 interface visit {
@@ -22,56 +21,82 @@ interface visit {
 @Component({
   selector: 'app-visitas-module',
   templateUrl: './visitas-module.component.html',
-  styleUrl: './visitas-module.component.css',
-  standalone: true,
-  imports:[
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatTableFilterModule
-  ]
+  styleUrl: './visitas-module.component.css'
 })
 export class VisitasModuleComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<visit>;
   myColumns: string[] = ['user_id', 'user', 'visit_date', 'check_in_time'];
   currentUser: any;
   private apiURL = environment.apiURL;
+  dateForm!: FormGroup;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   visitas: visit[] = [];
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService, private fb: FormBuilder) {
     this.dataSource = new MatTableDataSource<visit>([]);
   }
 
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
-    this.getVisits();
+    this.createForm();
+    //this.getVisits();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.applySorting();
   }
 
-  applySorting() {
-    if (this.dataSource && this.dataSource.sort) {
-      this.dataSource.sort.sort({ id: 'visit_date', start: 'desc', disableClear: true });
-      this.dataSource.sort.sort({ id: 'check_in_time', start: 'desc', disableClear: true });
-    }
+  createForm() {
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    this.dateForm = this.fb.group({
+      firstDate: [startOfMonth, [Validators.required, this.dateRangeValidator.bind(this)]],
+      endDate: [endOfMonth, [Validators.required, this.dateRangeValidator.bind(this)]]
+    });
   }
+
+  dateRangeValidator(control: any) {
+    const startDate = this.dateForm?.get('firstDate')?.value;
+    const endDate = this.dateForm?.get('endDate')?.value;
+    return startDate && endDate && endDate < startDate ? { dateRange: true } : null;
+  }
+
+
 
   getVisits() {
+
+    if (this.dateForm.invalid) {
+      return;
+    }
+
+    const { firstDate, endDate } = this.dateForm.value;
+
     this.http.get<any>(`${this.apiURL}/visits`, {
       headers: {
         Authorization: `Bearer ${this.currentUser.token}`
+      },
+      params: {
+        start_date: firstDate.toISOString().split('T')[0],
+        end_date: endDate.toISOString().split('T')[0]
       }
     }).subscribe({
       next: (response) => {
         this.visitas = response;
+        this.visitas.forEach(element => {
+          if(element.user === null){
+            element.user = {name:"N/A"}
+          }
+        });
+        this.visitas.sort((a, b) => {
+          const dateA = new Date(a.visit_date + 'T' + a.check_in_time);
+          const dateB = new Date(b.visit_date + 'T' + b.check_in_time);
+          return dateB.getTime() - dateA.getTime();
+        });
         this.dataSource.data = this.visitas;
       },
       error: (err) => {

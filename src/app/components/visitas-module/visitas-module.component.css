@@ -55,3 +55,14 @@ button :hover{
 .warn {
     color: red;
 }
+
+.date-form {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Espaciado entre los inputs y el botón */
+}
+
+.date-input {
+  flex: 1; /* Ajusta el tamaño de los campos de fecha */
+  min-width: 200px; /* Tamaño mínimo de los campos */
+}

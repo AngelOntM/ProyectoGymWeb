@@ -10,7 +10,6 @@ import { UserService } from '../../userservice.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableFilterModule } from 'ng-mat-table-filter';
 import { UpdateFormComponent } from './update-form/update-form.component';
-import { RegisterFormComponent } from './register-form/register-form.component';
 import { CommonModule } from '@angular/common';
 
 interface User {
@@ -120,17 +119,6 @@ export class ClientesModuleComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openAddUserDialog() {
-    const dialogRef = this.dialog.open(RegisterFormComponent, {
-      width: '800px'
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.addUser(result);
-      }
-    });
-  }
   
   addUser(user: User) {
     Swal.fire({

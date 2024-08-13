@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -27,6 +28,7 @@ export class OrdenModuleComponent implements OnInit, AfterViewInit {
   myColumns: string[] = ['id', 'user_id', 'order_date', 'total_amount', 'estado', 'actions'];
   currentUser: any;
   private apiURL = environment.apiURL;
+  dateForm!: FormGroup;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -34,14 +36,15 @@ export class OrdenModuleComponent implements OnInit, AfterViewInit {
   ordenes: Orden[] = [];
 
   constructor(private http: HttpClient, private userService: UserService, public dialog: MatDialog,
-    private router: Router
+    private router: Router, private fb: FormBuilder
   ) {
     this.dataSource = new MatTableDataSource<Orden>([]);
   }
 
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
-    this.getOrd();
+    this.createForm();
+    //this.getOrd();
   }
 
   ngAfterViewInit() {
@@ -56,10 +59,36 @@ export class OrdenModuleComponent implements OnInit, AfterViewInit {
     }
   }
 
+  createForm() {
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    this.dateForm = this.fb.group({
+      firstDate: [startOfMonth, [Validators.required, this.dateRangeValidator.bind(this)]],
+      endDate: [endOfMonth, [Validators.required, this.dateRangeValidator.bind(this)]]
+    });
+  }
+
+  dateRangeValidator(control: any) {
+    const startDate = this.dateForm?.get('firstDate')?.value;
+    const endDate = this.dateForm?.get('endDate')?.value;
+    return startDate && endDate && endDate < startDate ? { dateRange: true } : null;
+  }
+
   getOrd() {
+    if (this.dateForm.invalid) {
+      return;
+    }
+
+    const { firstDate, endDate } = this.dateForm.value;
+
     this.http.get<any>(`${this.apiURL}/orders`, {
       headers: {
         Authorization: `Bearer ${this.currentUser.token}`
+      },
+      params: {
+        start_date: firstDate.toISOString().split('T')[0],
+        end_date: endDate.toISOString().split('T')[0]
       }
     }).subscribe({
       next: (response) => {

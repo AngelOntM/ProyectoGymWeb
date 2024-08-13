@@ -21,10 +21,9 @@ import { DetalleComponent } from './components/orden-module/detalle/detalle.comp
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { RegisterFormComponent } from './components/clientes-module/register-form/register-form.component';
 import { UpdateFormComponent } from './components/clientes-module/update-form/update-form.component';
-import { EmployeeRegisterFormComponent } from './components/empleados-module/register-form/register-form.component';
 import { EmployeeUpdateFormComponent } from './components/empleados-module/update-form/update-form.component';
+import { VisitasModuleComponent } from './components/visitas-module/visitas-module.component';
 
 
 @NgModule({
@@ -35,10 +34,9 @@ import { EmployeeUpdateFormComponent } from './components/empleados-module/updat
     ProductsUpdateFormComponent,
     DetalleComponent,
     OrdenModuleComponent,
-    RegisterFormComponent,
     UpdateFormComponent,
-    EmployeeRegisterFormComponent,
     EmployeeUpdateFormComponent,
+    VisitasModuleComponent
   ],
   imports: [
     CommonModule,
@@ -62,9 +60,7 @@ import { EmployeeUpdateFormComponent } from './components/empleados-module/updat
     MembresiaUpdateFormComponent,
     ProductsRegisterFormComponent,
     ProductsUpdateFormComponent,
-    RegisterFormComponent,
     UpdateFormComponent,
-    EmployeeRegisterFormComponent,
     EmployeeUpdateFormComponent
     
 

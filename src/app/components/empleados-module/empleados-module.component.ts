@@ -10,7 +10,6 @@ import { UserService } from '../../userservice.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableFilterModule } from 'ng-mat-table-filter';
 import { EmployeeUpdateFormComponent } from './update-form/update-form.component';
-import { EmployeeRegisterFormComponent } from './register-form/register-form.component';
 
 interface Employee {
   id: number;
@@ -113,18 +112,6 @@ export class EmpleadosModuleComponent implements OnInit, AfterViewInit {
             Swal.fire('Error', err.error.message || 'Ha ocurrido un error', 'error');
           }
         });
-      }
-    });
-  }
-
-  openAddUserDialog() {
-    const dialogRef = this.dialog.open(EmployeeRegisterFormComponent, {
-      width: '800px'
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.addUser(result);
       }
     });
   }
