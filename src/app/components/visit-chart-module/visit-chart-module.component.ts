@@ -86,7 +86,7 @@ export class VisitChartModuleComponent implements OnInit {
         {
           name: 'Visitas',
           type: 'pie',
-          radius: '50%',
+          radius: '80%',
           data: dates.map((date: string, index: number) => ({
             name: date,
             value: counts[index]

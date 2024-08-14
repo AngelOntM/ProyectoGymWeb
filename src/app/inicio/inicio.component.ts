@@ -56,10 +56,11 @@ export class InicioComponent implements OnInit {
 
   showProductDetails(producto: Product) {
     Swal.fire({
-      title: `<h2 style="font-size: 24px; ">${producto.product_name}</h2>`,
+      title: `<h2 style="font-size: 24px;">${producto.product_name}</h2>`,
       html: `
         <div style="display: flex; align-items: center;">
-          <img src="${this.imgurl+producto.product_image_path}" alt="${producto.product_name}" style="width: 150px; height: auto; margin-right: 20px;">
+          <img src="${producto.product_image_path ? this.imgurl + producto.product_image_path : './../../assets/img/logo.jpg'}" 
+               style="width: 150px; height: auto; margin-right: 20px;">
           <div style="text-align: left;">
             <p style="font-size: 16px; margin-bottom: 10px;">${producto.description}</p>
             <p style="font-size: 20px; font-weight: bold; color: #e74c3c;">$${producto.price} MXN</p>

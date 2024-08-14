@@ -90,7 +90,10 @@ export class MembresiasComponent implements OnInit {
     Swal.fire({
       title: member.product_name,
       html: `
-        <img src="${this.imgurl + member.product_image_path}" alt="${member.product_name}" style="width: 100px; height: 100px; margin-bottom: 10px;">
+        <img 
+          src="${member.product_image_path ? this.imgurl + member.product_image_path : '../../assets/img/logo.jpg'}" 
+          alt="${member.product_name}" 
+          style="width: 30%; margin-bottom: 10px;">
         <p>${member.description}</p>
         <p><strong>Precio:</strong> $${member.price} MXN</p>
       `,
