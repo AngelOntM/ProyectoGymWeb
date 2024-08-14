@@ -51,12 +51,12 @@ export class PerfilComponent implements OnInit {
     this.fecha = new Date();
   }
 
-  ngOnInit(){
-    this.currentUser = this.userService.getLoggedInUser()
-    this.getUserMember()
-    this.getUserVisit()
+  ngOnInit() {
+    this.currentUser = this.userService.getLoggedInUser();
+    this.getUserMember();
+    this.getUserVisit();
   }
-
+  
   getUserMember() {
     this.http.get<any>(`${this.apiURL}/user`, {
       headers: {
@@ -64,8 +64,9 @@ export class PerfilComponent implements OnInit {
       }
     }).subscribe({
       next: (response) => {
-        this.userMember = response.active_membership;
-        this.calcularDiferenciaDias()
+        // Asegúrate de que userMember sea un objeto válido
+        this.userMember = response.active_membership || { membership_name: 'N/A', end_date: 'N/A' };
+        this.calcularDiferenciaDias();
       },
       error: (err) => {
         Swal.fire('Error', 'No se pudo cargar el perfil', 'error');

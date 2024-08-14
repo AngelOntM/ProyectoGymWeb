@@ -3,29 +3,27 @@
   <div class="profile-info-card">
     <div class="profile-info-left">
       <label for="name">Nombre:</label>
-      <input id="name" type="text" value="{{ currentUser.name}}" readonly>
+      <input id="name" type="text" value="{{ currentUser?.name || 'N/A' }}" readonly>
       
       <label for="phone">Teléfono:</label>
-      <input id="phone" type="text" value="{{ currentUser.telefono}}" readonly>
+      <input id="phone" type="text" value="{{ currentUser?.telefono || 'N/A' }}" readonly>
       
       <label for="email">Correo:</label>
-      <input id="email" type="email" value="{{ currentUser.email}}" readonly>
+      <input id="email" type="email" value="{{ currentUser?.email || 'N/A' }}" readonly>
     </div>
     
     <div class="profile-info-right">
-      
       <label for="membership-type">Tipo de Membresía:</label>
-      <input id="membership-type" type="text" value="{{userMember.membership_name}}" readonly>
+      <input id="membership-type" type="text" value="{{ userMember?.membership_name || 'N/A' }}" readonly>
       
       <label for="days-remaining">Días restantes:</label>
-      <input id="days-remaining" type="text" value="{{diasRestante}}" readonly>
-
+      <input id="days-remaining" type="text" value="{{ diasRestante ? diasRestante : 'N/A'}}" readonly>
     </div>
   </div>
   <h2>Opciones:</h2>
   <div class="profile-info-card">
     <button class="renew-button" (click)="changePassword()">Cambiar contraseña</button>
-    <button class="renew-button" (click)="canjear()">Canjear codigo</button>
+    <button class="renew-button" (click)="canjear()">Canjear código</button>
   </div>
 
   <h2>Tus visitas</h2>
