@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { EspaciosComponent } from './espacios/espacios.component';
+import { AuthService } from './auth.service';
 
 
 
@@ -59,7 +60,8 @@ import { EspaciosComponent } from './espacios/espacios.component';
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthService, multi: true },
   ],
   bootstrap: [AppComponent]
 })
