@@ -10,6 +10,7 @@ import { UserService } from '../../userservice.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableFilterModule } from 'ng-mat-table-filter';
 import { EmployeeUpdateFormComponent } from './update-form/update-form.component';
+import { CommonModule } from '@angular/common';
 
 interface Employee {
   id: number;
@@ -33,7 +34,8 @@ interface Employee {
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatTableFilterModule
+    MatTableFilterModule,
+    CommonModule
   ]
 })
 export class EmpleadosModuleComponent implements OnInit, AfterViewInit {
@@ -80,7 +82,7 @@ export class EmpleadosModuleComponent implements OnInit, AfterViewInit {
   editUser(user: Employee) {
     const dialogRef = this.dialog.open(EmployeeUpdateFormComponent, {
       width: '800px',
-      data: user
+      data: {user, from: false},
     });
   
     dialogRef.afterClosed().subscribe(result => {

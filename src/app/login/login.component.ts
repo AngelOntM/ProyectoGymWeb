@@ -90,6 +90,7 @@ export class LoginComponent {
                 verified = true;  // Mark as verified
 
                 const user = {
+                  id: response.user.id,
                   rol: response.user.rol.rol_name,
                   name: response.user.name,
                   token: verifyResponse.token,
