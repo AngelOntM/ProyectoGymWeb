@@ -19,6 +19,12 @@ body, html {
     text-align: center;
     margin: 20px 0;
   }
+
+  .table-container {
+    width: 80%; /* Asegúrate de que este valor coincida con el ancho del contenedor de las tarjetas */
+    margin: 0 auto; /* Centra el contenedor */
+  }
+  
   
   .profile-info-card {
     display: flex;
@@ -70,6 +76,72 @@ body, html {
   .renew-button:hover {
     background-color: #333;
   }
+
+  table {
+    width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  th.mat-header-cell, td.mat-cell {
+    padding: 16px;
+  }
+  
+  mat-paginator {
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  button {
+    margin-right: 8px;
+  }
+  
+  .mat-icon-button {
+    padding: 0;
+  }
+  
+  .mat-header-cell, .mat-cell {
+    text-align: center;
+  }
+
+  .header {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+  
+  .header h1 {
+    margin-right: auto; /* Empuja el h1 hacia la izquierda */
+  }
+
+  /* Ajusta el estilo del h1 para que el texto se corte */
+h1 {
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto se corta */
+}
+
+button {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button :hover{
+    cursor: pointer;
+}
+
+.primary {
+    color: blue;
+}
+
+.warn {
+    color: red;
+}
+  
 
   .footer {
     background-color: #333;

@@ -9,7 +9,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PerfilComponent } from './perfil/perfil.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ProductosComponent } from './productos/productos.component';
 import { MembresiasComponent } from './membresias/membresias.component';
@@ -35,7 +34,6 @@ import { EspaciosComponent } from './espacios/espacios.component';
     LoginComponent,
     InicioComponent,
     NavbarComponent,
-    PerfilComponent,
     LayoutComponent,
     ProductosComponent,
     MembresiasComponent,

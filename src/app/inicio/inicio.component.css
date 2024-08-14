@@ -146,11 +146,13 @@ body, html {
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
+    cursor: pointer;
   }
   
   .producto-image img {
-    width: 100%;
+    width: 75%;
     height: auto;
+    margin-left: 12.5%;
     max-height: 300px;
     object-fit: contain;
     border-radius: 8px;
@@ -162,19 +164,45 @@ body, html {
   }
   
   .producto-info h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-  .producto-info p {
-    font-size: 1em;
+    font-size: 1.8em;
     margin-bottom: 10px;
   }
   
   .producto-info .precio {
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: #e67e22;
     font-weight: bold;
+  }
+
+  .swal-title-class {
+    font-size: 24px;
+  }
+  
+  .swal-html-class {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .swal-html-class img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+  }
+  
+  .swal-html-class div {
+    text-align: left;
+  }
+  
+  .swal-html-class p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .swal-html-class .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e74c3c;
   }
 
 

@@ -1,22 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { UserService } from '../userservice.service';
 import Swal from 'sweetalert2';
 import { environment } from '../../enviroment/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { strict } from 'node:assert';
 
 interface User {
   membership_name:string,
   end_date:string
+}
+
+interface visit {
+  user_id: number;
+  visit_date: string;
+  check_in_time: string;
+  user: {
+    name: string;
   }
+}
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit {
+
+  dataSource: MatTableDataSource<visit>;
+  myColumns: string[] = ['visit_date', 'check_in_time'];
 
   currentUser : any
   apiURL = environment.apiURL
@@ -24,15 +39,22 @@ export class PerfilComponent {
   fecha: Date;
   diasRestante: any;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  visitas: visit[] = [];
+
 
   constructor(private userService:UserService, private http:HttpClient, private router:Router)
   {
+    this.dataSource = new MatTableDataSource<visit>([])
     this.fecha = new Date();
   }
 
   ngOnInit(){
     this.currentUser = this.userService.getLoggedInUser()
     this.getUserMember()
+    this.getUserVisit()
   }
 
   getUserMember() {
@@ -47,6 +69,21 @@ export class PerfilComponent {
       },
       error: (err) => {
         Swal.fire('Error', 'No se pudo cargar el perfil', 'error');
+      }
+    });
+  }
+
+  getUserVisit() {
+    this.http.get<any>(`${this.apiURL}/user/visits`, {
+      headers: {
+        Authorization: `Bearer ${this.currentUser.token}`
+      }
+    }).subscribe({
+      next: (response) => {
+        this.dataSource = response;
+      },
+      error: (err) => {
+        Swal.fire('Error', 'No se pudo cargar las visitas', 'error');
       }
     });
   }

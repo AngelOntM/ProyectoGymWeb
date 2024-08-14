@@ -54,36 +54,13 @@
       <div class="content">
         <h2>Contamos con los productos necesarios para tu progreso</h2>
         <div class="productos">
-          <div class="producto-card">
+          <div *ngFor="let producto of productos | slice:0:3" class="producto-card" (click)="showProductDetails(producto)">
             <div class="producto-image">
-              <img src="../../assets/img/proteina.jpg" alt="Proteina Whey">
+              <img src="{{ imgurl + producto.product_image_path }}" alt="Proteina Whey">
             </div>
             <div class="producto-info">
-              <h3>Proteina Whey</h3>
-              <p>¡Optimiza tu rendimiento con Proteína Whey Ultra Premium! Nuestra fórmula avanzada ...</p>
-              <p class="precio">$949.99</p>
-            </div>
-          </div>
-        
-          <div class="producto-card">
-            <div class="producto-image">
-              <img src="../../assets/img/straps.png" alt="Cintas de Entrenamiento">
-            </div>
-            <div class="producto-info">
-              <h3>Straps</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at interdum nunc...</p>
-              <p class="precio">$199.99</p>
-            </div>
-          </div>
-        
-          <div class="producto-card">
-            <div class="producto-image">
-              <img src="../../assets/img/estera.jpg" alt="Proteina Whey">
-            </div>
-            <div class="producto-info">
-              <h3>Estera de Yoga</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at interdum nunc...</p>
-              <p class="precio">$94.99</p>
+              <h3>{{ producto.product_name }}</h3>
+              <p class="precio">${{ producto.price }} MXN</p>
             </div>
           </div>
         </div>

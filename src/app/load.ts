@@ -11,6 +11,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableFilterModule } from 'ng-mat-table-filter';
 
+import { PerfilComponent } from './perfil/perfil.component';
+
 import { MembresiaRegisterFormComponent } from './components/membresias-module/register-form/register-form.component';
 import { MembresiaUpdateFormComponent } from './components/membresias-module/update-form/update-form.component';
 import { ProductsRegisterFormComponent } from './components/productos-module/register-form/register-form.component';
@@ -41,7 +43,8 @@ import { OrdenChartModuleComponent } from './components/orden-chart-module/orden
     EmployeeUpdateFormComponent,
     VisitasModuleComponent,
     VisitChartModuleComponent,
-    OrdenChartModuleComponent
+    OrdenChartModuleComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
