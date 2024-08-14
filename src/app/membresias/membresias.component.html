@@ -8,7 +8,8 @@
       <div class="membresias">
         <div *ngFor="let membre of membership" class="membresia-card" (click)="showMemberDetails(membre)">
           <div class="membresia-image">
-            <img src="{{imgurl + membre.product_image_path}}" alt="" style="width: 80%;">
+            <img *ngIf="membre.product_image_path" src="{{imgurl + membre.product_image_path}}" style="width: 80%;">
+            <img *ngIf="!membre.product_image_path" src="../../assets/img/logo.jpg" style="width: 80%;">
           </div>
           <div class="membresia-info">
             <h3>{{membre.product_name}}</h3>

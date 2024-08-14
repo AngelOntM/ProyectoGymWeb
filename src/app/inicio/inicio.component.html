@@ -56,7 +56,8 @@
         <div class="productos">
           <div *ngFor="let producto of productos | slice:0:3" class="producto-card" (click)="showProductDetails(producto)">
             <div class="producto-image">
-              <img src="{{ imgurl + producto.product_image_path }}" alt="Proteina Whey">
+              <img *ngIf="producto.product_image_path" src="{{ imgurl + producto.product_image_path }}">
+          <img *ngIf="!producto.product_image_path" src="./../../assets/img/logo.jpg">
             </div>
             <div class="producto-info">
               <h3>{{ producto.product_name }}</h3>

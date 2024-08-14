@@ -44,20 +44,20 @@ export class OrdenModuleComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
     this.createForm();
-    //this.getOrd();
+    this.getOrd();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.applySorting()
+    //this.applySorting()
   }
 
-  applySorting() {
-    if (this.dataSource && this.dataSource.sort) {
-      this.dataSource.sort.sort({ id: 'id', start: 'desc', disableClear: true });
-    }
-  }
+  // applySorting() {
+  //   if (this.dataSource && this.dataSource.sort) {
+  //     this.dataSource.sort.sort({ id: 'id', start: 'desc', disableClear: true });
+  //   }
+  // }
 
   createForm() {
     const today = new Date();
@@ -94,10 +94,13 @@ export class OrdenModuleComponent implements OnInit, AfterViewInit {
       next: (response) => {
         this.ordenes = response;
         this.ordenes.forEach(element => {
-          if(element.user_id === null){
+          if (element.user_id === null) {
             element.user_id = "N/A";
-          }          
+          }
         });
+        
+        // Ordenar las órdenes por la ID de mayor a menor
+        this.ordenes.sort((a, b) => b.id - a.id);        
         this.dataSource.data = this.ordenes;
       },
       error: (err) => {

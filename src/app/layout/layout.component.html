@@ -30,7 +30,7 @@
         </a>
         <a *ngIf="currentUser.rol === 'Admin'" mat-list-item routerLink="ordenes">
           <span class="entry colorText">
-            <mat-icon>shopping_cart</mat-icon>
+            <mat-icon>move_to_inbox</mat-icon>
             <span>Ordenes</span>
           </span>
         </a>
@@ -42,12 +42,14 @@
         </a>
         <a mat-list-item routerLink="vapi">
           <span class="entry colorText">
-            <span>Reporte Visitas</span>
+            <mat-icon>pie_chart</mat-icon>
+            <span>Rep. visitas</span>
           </span>
         </a>
         <a mat-list-item routerLink="vapo">
           <span class="entry colorText">
-            <span>Reporte Ordenes</span>
+            <mat-icon>bar_chart</mat-icon>
+            <span>Rep. ordenes</span>
           </span>
         </a>
         <!-- Agrega más enlaces de navegación según sea necesario -->

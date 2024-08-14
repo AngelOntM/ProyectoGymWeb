@@ -80,7 +80,13 @@ export class PerfilComponent implements OnInit {
       }
     }).subscribe({
       next: (response) => {
-        this.dataSource = response;
+        this.visitas = response;
+        this.visitas.sort((a, b) => {
+          const dateA = new Date(a.visit_date + 'T' + a.check_in_time);
+          const dateB = new Date(b.visit_date + 'T' + b.check_in_time);
+          return dateB.getTime() - dateA.getTime();
+        });
+        this.dataSource.data = this.visitas;
       },
       error: (err) => {
         Swal.fire('Error', 'No se pudo cargar las visitas', 'error');

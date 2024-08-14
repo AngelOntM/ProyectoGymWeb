@@ -42,7 +42,7 @@ export class VisitasModuleComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.currentUser = this.userService.getLoggedInUser();
     this.createForm();
-    //this.getVisits();
+    this.getVisits();
   }
 
   ngAfterViewInit() {
