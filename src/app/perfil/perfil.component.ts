@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { strict } from 'node:assert';
 
 interface User {
-  membership_name:string,
-  end_date:string
+  membership_name: string;
+  end_date: string;
 }
 
 interface visit {
@@ -26,15 +25,15 @@ interface visit {
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.css'
+  styleUrls: ['./perfil.component.css'] // <-- Corregido styleUrl a styleUrls
 })
 export class PerfilComponent implements OnInit {
 
   dataSource: MatTableDataSource<visit>;
   myColumns: string[] = ['visit_date', 'check_in_time'];
 
-  currentUser : any
-  apiURL = environment.apiURL
+  currentUser: any;
+  apiURL = environment.apiURL;
   userMember!: User;
   fecha: Date;
   diasRestante: any;
@@ -44,10 +43,12 @@ export class PerfilComponent implements OnInit {
 
   visitas: visit[] = [];
 
-
-  constructor(private userService:UserService, private http:HttpClient, private router:Router)
-  {
-    this.dataSource = new MatTableDataSource<visit>([])
+  constructor(
+    private userService: UserService, 
+    private http: HttpClient, 
+    private router: Router
+  ) {
+    this.dataSource = new MatTableDataSource<visit>([]);
     this.fecha = new Date();
   }
 
@@ -55,8 +56,12 @@ export class PerfilComponent implements OnInit {
     this.currentUser = this.userService.getLoggedInUser();
     this.getUserMember();
     this.getUserVisit();
+
+    // Vincular paginator y sort al dataSource
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
-  
+
   getUserMember() {
     this.http.get<any>(`${this.apiURL}/user`, {
       headers: {
@@ -64,7 +69,6 @@ export class PerfilComponent implements OnInit {
       }
     }).subscribe({
       next: (response) => {
-        // Asegúrate de que userMember sea un objeto válido
         this.userMember = response.active_membership || { membership_name: 'N/A', end_date: 'N/A' };
         this.calcularDiferenciaDias();
       },
@@ -88,16 +92,18 @@ export class PerfilComponent implements OnInit {
           return dateB.getTime() - dateA.getTime();
         });
         this.dataSource.data = this.visitas;
+        
+        // VINCULA EL PAGINADOR Y EL ORDENAMIENTO AQUÍ
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error: (err) => {
         Swal.fire('Error', 'No se pudo cargar las visitas', 'error');
       }
     });
   }
-
   
 
-  // Método para calcular la diferencia en días
   calcularDiferenciaDias() {
     const endDateString = this.userMember.end_date;
     const endDate = new Date(endDateString);
@@ -110,22 +116,22 @@ export class PerfilComponent implements OnInit {
     Swal.fire({
       title: 'Canjear Código',
       html:
-      '<style>' +
+        '<style>' +
         'input[type=number]::-webkit-outer-spin-button, ' +
         'input[type=number]::-webkit-inner-spin-button { ' +
-          '-webkit-appearance: none; ' +
-          'margin: 0; ' +
+        '-webkit-appearance: none; ' +
+        'margin: 0; ' +
         '}' +
         'input[type=number] { ' +
-          '-moz-appearance: textfield; ' +
+        '-moz-appearance: textfield; ' +
         '}' +
-      '</style>' +
-      '<input id="swal-input2" class="swal2-input" maxlength="10" placeholder="Código">',
+        '</style>' +
+        '<input id="swal-input2" class="swal2-input" maxlength="10" placeholder="Código">',
       focusConfirm: false,
       preConfirm: () => {
         const code = (document.getElementById('swal-input2') as HTMLInputElement).value;
         if (!code || code.length !== 10) {
-          Swal.showValidationMessage('Por favor, ingresa un codigo válido de 10 caracteres');
+          Swal.showValidationMessage('Por favor, ingresa un código válido de 10 caracteres');
         }
         return { code: code };
       }
@@ -136,8 +142,8 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  makeRedeem( code: string) {
-    const payload = { code:code }
+  makeRedeem(code: string) {
+    const payload = { code: code };
     Swal.fire({
       title: 'Cargando...',
       text: 'Por favor espere',
@@ -164,15 +170,15 @@ export class PerfilComponent implements OnInit {
   changePassword() {
     Swal.fire({
       title: 'Cambiar Contraseña',
-      html: 
+      html:
         '<style>' +
         'input[type=number]::-webkit-outer-spin-button, ' +
         'input[type=number]::-webkit-inner-spin-button { ' +
-          '-webkit-appearance: none; ' +
-          'margin: 0; ' +
+        '-webkit-appearance: none; ' +
+        'margin: 0; ' +
         '}' +
         'input[type=number] { ' +
-          '-moz-appearance: textfield; ' +
+        '-moz-appearance: textfield; ' +
         '}' +
         '</style>' +
         '<input id="swal-input2" class="swal2-input" maxlength="10" placeholder="Contraseña actual">' +
@@ -192,12 +198,12 @@ export class PerfilComponent implements OnInit {
       }
     });
   }
-  
+
   makeChange(pass: string, npass: string) {
     const payload = {
       current_password: pass,
       new_password: npass,
-      new_password_confirmation: npass // Asegurarse de enviar la confirmación si es necesario
+      new_password_confirmation: npass
     };
     Swal.fire({
       title: 'Cargando...',
@@ -216,10 +222,9 @@ export class PerfilComponent implements OnInit {
         Swal.fire('Éxito', 'El cambio fue exitoso.', 'success');
       },
       error: (err) => {
-        Swal.fire('Error', 'Por favor, llenar los campos de forma correcta ', 'error');
+        Swal.fire('Error', 'Por favor, llenar los campos de forma correcta', 'error');
       }
     });
   }
-  
 
 }

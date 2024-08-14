@@ -126,7 +126,16 @@ export class MembresiasComponent implements OnInit {
       if (this.currentUser.rol === 'Cliente') {
         this.current(productId);
       } else {
-        Swal.fire('Error', 'No puedes comprar aquí', 'error');
+        Swal.fire({
+          title: 'Error',
+          text: 'Eres un administrador, no necesitas membresia',
+          icon: 'error', // Puedes usar 'success', 'error', 'warning', 'info', 'question'
+          showConfirmButton: true, // Muestra el botón de confirmación
+          confirmButtonText: 'Aceptar', // Texto del botón de confirmación
+          didOpen: () => {
+            Swal.hideLoading(); // Explicitamente esconder cualquier loading
+          }
+        });
       }
     }
     catch{
