@@ -53,36 +53,42 @@ export class LoginComponent {
     this.http.post<any>(`${this.apiURL}/login/employee`, credentials).subscribe({
       next: async (response) => {
         if(response.user.rol_id === 1) {
-          const { value: code } = await Swal.fire({
-            title: 'Código 2FA requerido',
-            input: 'text',
-            inputLabel: 'Ingrese su código 2FA',
-            inputPlaceholder: 'Código 2FA',
-            showCancelButton: true,
-            confirmButtonText: 'Verificar',
-            cancelButtonText: 'Cancelar',
-            preConfirm: async (code) => {
-              if (!code) {
-                Swal.showValidationMessage('Debe ingresar un código');
-                return;
-              }
-              return code;
-            }
-          });
+          let verified = false;
 
-          if (code) {
-            const codeAsInteger = parseInt(code, 10);
-            const body = { email:response.user.email, two_factor_code:codeAsInteger }
-            Swal.fire({
-              title: 'Verificando 2FA...',
-              text: 'Por favor espera un momento',
-              allowOutsideClick: false,
-              didOpen: () => {
-                Swal.showLoading();
+          while (!verified) {
+            const { value: code } = await Swal.fire({
+              title: 'Código 2FA requerido',
+              input: 'text',
+              inputLabel: 'Ingrese su código 2FA',
+              inputPlaceholder: 'Código 2FA',
+              showCancelButton: true,
+              confirmButtonText: 'Verificar',
+              cancelButtonText: 'Cancelar',
+              preConfirm: (code) => {
+                if (!code) {
+                  Swal.showValidationMessage('Debe ingresar un código');
+                  return;
+                }
+                return code;
               }
             });
-            this.http.post<any>(`${this.apiURL}/verify-2fa`, body).subscribe({
-              next: (verifyResponse) => {
+
+            if (code) {
+              const codeAsInteger = parseInt(code, 10);
+              const body = { email:response.user.email, two_factor_code:codeAsInteger };
+
+              Swal.fire({
+                title: 'Verificando 2FA...',
+                text: 'Por favor espera un momento',
+                allowOutsideClick: false,
+                didOpen: () => {
+                  Swal.showLoading();
+                }
+              });
+
+              await this.http.post<any>(`${this.apiURL}/verify-2fa`, body).toPromise().then((verifyResponse) => {
+                verified = true;  // Mark as verified
+
                 const user = {
                   rol: response.user.rol.rol_name,
                   name: response.user.name,
@@ -99,23 +105,24 @@ export class LoginComponent {
                 }).then(() => {
                   this.router.navigateByUrl('/home');
                 });
-              },
-              error: (err) => {
-                Swal.fire({
+
+              }).catch(async err => {
+                await Swal.fire({
                   icon: 'error',
-                  title: 'Error de verificación 2FA',
-                  text: 'Error al verificar el código 2FA',
+                  title: 'Código incorrecto',
+                  text: 'El código 2FA es incorrecto. Inténtalo nuevamente.',
                 });
-                console.error(err);
-              }
-            });
+              });
+            } else {
+              break;
+            }
           }
         } else {
           Swal.fire({
             icon: 'error',
             title: 'No puedes hacer eso',
             text: 'No tienes acceso aqui!!',
-          })
+          });
         }
       },
       error: (err) => {
@@ -129,7 +136,7 @@ export class LoginComponent {
               email: response.user.email
             };
             this.session.setLoggedInUser(user);
-  
+
             Swal.fire({
               icon: 'success',
               title: '¡Inicio de sesión exitoso!',
@@ -147,7 +154,7 @@ export class LoginComponent {
               text: 'Correo electrónico o contraseña incorrectos',
             });
           }
-        })
+        });
       }
     });
   }

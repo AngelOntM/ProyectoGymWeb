@@ -25,6 +25,7 @@ export class EmployeeUpdateFormComponent {
       phone_number: ['', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
       address: ['', [Validators.required, Validators.maxLength(60)]],
       date_of_birth: ['', Validators.required],
+      rol_id: ['', Validators.required]
     });
     
   }
@@ -36,6 +37,7 @@ export class EmployeeUpdateFormComponent {
       phone_number: this.data.phone_number,
       address: this.data.address,
       date_of_birth: this.data.date_of_birth,
+      rol_id: this.data.rol_id === 1 ? 1 : 2
     });
   }
 
@@ -45,7 +47,7 @@ export class EmployeeUpdateFormComponent {
       if (dateOfBirthControl) {
         const dateOfBirthValue = dateOfBirthControl.value;
         const formattedDate = formatDate(dateOfBirthValue, 'yyyy-MM-dd', 'en-US');
-        const formData = { ...this.updateUserForm.value, date_of_birth: formattedDate };
+        const formData = { ...this.updateUserForm.value, date_of_birth: formattedDate, rol_id: this.updateUserForm.value.rol_id };
         this.dialogRef.close(formData);
       } else {
         console.error('El control date_of_birth no está disponible en el formulario.');
